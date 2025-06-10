@@ -2,17 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "app.js",
+      "src": "./app.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    {
-      "src": "/(styles|scripts|images|favicon\\.ico|.*\\.css|.*\\.js|.*\\.png|.*\\.jpg|.*\\.svg)",
-      "headers": {
-        "cache-control": "public,max-age=31536000,immutable"
-      }
-    },
     {
       "src": "/(.*)",
       "dest": "app.js"
