@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/styles/index.css">
+</head>
+
+<body>
+  <a href="/messages">Mini Message Board</a>
+  <main class="content">
+    <div id="form-container">
+      <form method="POST" action="/messages/new">
+        <div>
+          <label for="name-input">
+            Name
+            <br>
+            <input type="text" name="author" id="name-input" placeholder="Enter your name" required>
+          </label>
+        </div>
+
+        <div>
+          <label for="country-input">
+            Country
+            <br>
+            <select name="countryCode" id="country-input" required>
+              <option value="" disabled selected>Select your country</option>
+              <% countries.forEach(country=> { %>
+                <option value="<%= country.code %>">
+                  <%= country.name %>
+                </option>
+                <% }) %>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label for="message-input">
+            Message
+            <br>
+            <textarea name="message" id="message-input" placeholder="Write your message" required></textarea>
+          </label>
+        </div>
+
+        <button type="submit">Submit</button>
+
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>

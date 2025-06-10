@@ -1,0 +1,89 @@
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: medium;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+
+#title {
+  font-size: 2rem;
+}
+
+#message-country {
+  font-weight: 500;
+}
+
+#add-msg-btn {
+  font-size: 2rem;
+  border: 1px solid rgb(60, 50, 50);
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+  background-color: bisque;
+}
+
+#messages-container {
+  padding-inline: 1rem;
+  display: grid;
+  /* border: 1px solid red; */
+  grid-template-columns: 250px 250px 250px 250px;
+  row-gap: 5rem;
+  justify-content: space-evenly;
+}
+
+.sticky-card {
+  background-color: antiquewhite;
+  /* border: 1px solid red; */
+  height: 250px;
+  width: 250px;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sticky-card>#middle {
+  /* border: 1px solid red; */
+  max-height: 60%;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  font-family: cursive;
+  color: rgb(118, 115, 111);
+}
+
+.sticky-card>#bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  border-top: 1px dotted rgb(98, 82, 82);
+}

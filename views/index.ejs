@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/styles/index.css">
+</head>
+
+<body>
+  <nav>
+    <h1 id="title">Mini Message Board</h1>
+    <button id="add-msg-btn" onclick="window.location.href='/messages/new'">+</button>
+  </nav>
+
+  <br>
+  <br>
+  <br>
+  
+  <div id="messages-container">
+    <% messages.map(message=> { %>
+      <div class="sticky-card" onclick="window.location.href='/messages/details/<%= message.id %>'">
+        <div id="top">
+          <p id="date-added">
+            <%= message.formattedDate %>
+          </p>
+        </div>
+        <div id="middle">
+          <p id="message-text">
+            <%= message.text %>
+          </p>
+        </div>
+        <div id="bottom">
+          <p id="message-user">
+            <i>
+              <%= message.user %>
+            </i>
+          </p>
+          <p>
+            from 
+            <span id="message-country">
+              <%= message.countryName %>
+            </span>
+          </p>
+        </div>
+      </div>
+      <% }) %>
+  </div>
+</body>
+
+</html>
