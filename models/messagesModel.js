@@ -1,7 +1,6 @@
 const db = require('../db/index');
 
 const getMessagesQuery = async () => {
-  initializeTables();
   try {
     const { rows } = await db.query('SELECT * FROM messages;')
     return rows;
@@ -11,7 +10,6 @@ const getMessagesQuery = async () => {
 }
 
 const createMessage = async (messageDataObj) => {
-  initializeTables();
   try {
     const { id, text, user, countryCode } = messageDataObj;
     await db.query('INSERT INTO messages(id, text, name, country_code) VALUES ($1, $2, $3, $4)', [id, text, user, countryCode]);
