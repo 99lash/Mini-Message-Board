@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-require('dotenv').config();
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const indexRouter = require('./routes/indexRouter');
 const messagesRouter = require('./routes/messagesRouter');
