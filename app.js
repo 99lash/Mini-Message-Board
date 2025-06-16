@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+require('dotenv').config();
 
 const indexRouter = require('./routes/indexRouter');
 const messagesRouter = require('./routes/messagesRouter');
@@ -20,7 +21,8 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => 
-  console.log(`Listening on http://localhost:${PORT}/`)
+  console.log(`🚀 Running on http://localhost:${PORT}/`)
 );
+
 
 module.exports = app;
