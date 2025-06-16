@@ -1,3 +1,5 @@
+const countries = require('../countries.json');
+
 function formatDateToMMDDYYYY(date) {
   const mm = String(date.getMonth() + 1).padStart(2, '0');
   const dd = String(date.getDate()).padStart(2, '0');
@@ -9,12 +11,12 @@ function getCountryName(code) {
   return countries.find(c => c.code === code).name
 }
 
-const formattedMessagesFn = () => {
+const formattedMessagesFn = (messages) => {
   return messages.map(msg => (
     {
       ...msg,
-      formattedDate: formatDateToMMDDYYYY(new Date(msg.added)),
-      countryName: getCountryName(msg.countryCode)
+      formattedDate: formatDateToMMDDYYYY(new Date(msg.created_date)),
+      countryName: getCountryName(msg.country_code)
     }
   ));
 }
