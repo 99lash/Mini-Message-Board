@@ -1,32 +1,17 @@
-const messages = require('../models/messagesModel');
+// const messages = require('../models/messagesModel');
+const { createMessage, getMessagesQuery } = require('../models/messagesModel');
 const asyncHandler = require('express-async-handler');
 const ErrorNotFound = require('../errors/CustomNotFoundError');
+const { formattedMessagesFn } = require('../utils/utils');
 const countries = require('../countries.json');
 
-function formatDateToMMDDYYYY(date) {
-  const mm = String(date.getMonth() + 1).padStart(2, '0');
-  const dd = String(date.getDate()).padStart(2, '0');
-  const yyyy = date.getFullYear();
-  return `${mm}/${dd}/${yyyy}`;
-}
 
-function getCountryName(code) {
-  return countries.find(c => c.code === code).name
-}
-
-const formattedMessagesFn = () => {
-  return messages.map(msg => (
-    {
-      ...msg,
-      formattedDate: formatDateToMMDDYYYY(new Date(msg.added)),
-      countryName: getCountryName(msg.countryCode)
-    }
-  ));
-}
 
 const getMessages = asyncHandler(async (req, res) => {
-  const formattedMessages = formattedMessagesFn().sort((a, b) => Number(b.added)-Number(a.added));
-  console.log(formattedMessages)
+  const messages = await getMessagesQuery();
+  console.log(messages);
+  const formattedMessages = formattedMessagesFn(messages).sort((a, b) => Number(b.added) - Number(a.added));
+  // console.log(formattedMessages)
   res.render('index', {
     title: "Mini Message Board",
     messages: formattedMessages
@@ -35,13 +20,14 @@ const getMessages = asyncHandler(async (req, res) => {
 
 const getMessage = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const formattedMessages = formattedMessagesFn();
+  const messages = await getMessagesQuery();
+  const formattedMessages = formattedMessagesFn(messages);
   const formattedMessage = formattedMessages.find(message => message.id == id);
 
   if (!formattedMessage) {
     throw new ErrorNotFound("Message not found");
   }
-  res.render('messageDetails.ejs', {
+  res.render('messageDetails', {
     title: 'Message Details | Mini Message Board',
     message: formattedMessage
   });
@@ -57,17 +43,17 @@ const renderNewMessageForm = asyncHandler(async (req, res) => {
 const createNewMessage = asyncHandler(async (req, res) => {
   const { author, message, countryCode } = req.body;
   // find the countryName using countryCode
-  console.log(req.body);
+  // console.log(req.body);
   const messageData = {
     id: crypto.randomUUID(),
     text: message,
     user: author,
     countryCode: countryCode,
-    added: new Date()
   }
 
   // console.log(messageData);
-  messages.push(messageData);
+  // messages.push(messageData);
+  await createMessage(messageData);
   res.redirect('/messages');
 });
 
